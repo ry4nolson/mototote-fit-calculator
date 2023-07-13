@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 
 
-
 // Constants and configuration
 //maximum bike weight for a mototote
 const MAX_WEIGHT = 600;
