@@ -14,13 +14,13 @@ const MAX_FRONT = 5.5;
 const MAX_REAR = 9;
 
 //Carrier ranges as: [weight, max_front, max_rear]
-const M3_Range = [500, 4.75, 6];
+const M3_RANGE = [500, 4.75, 6];
 const SPORT_RANGE = [600, 5, 8.5];
 const MAX_RANGE = [600, 4.75, 6.0];
 const MAX_PLUS_RANGE = [600, 5.5, 9.0];
 
 const RANGES = {
-  "m3": M3_Range,
+  "m3": M3_RANGE,
   "sport": SPORT_RANGE,
   "max": MAX_RANGE,
   "maxPlus": MAX_PLUS_RANGE
@@ -72,7 +72,7 @@ function App() {
   const [positiveMessage, setPositiveMessage] = useState("");
   const [recommendations, setRecommendations] = useState([]);
 
-  const ratedWeight = aftermarket ?
+  const weightCapacity = aftermarket ?
     tongueWeight < towCap ? tongueWeight : 0 :
     towCap * 0.1
 
@@ -81,15 +81,14 @@ function App() {
     setPositiveMessage("");
     setRecommendations([]);
 
-    if (!weight || !front || !rear || !ratedWeight) return;
+    if (!weight || !front || !rear || !weightCapacity) return;
 
     if (weight > MAX_WEIGHT) {
       setNegativeMessage(BIKE_TOO_HEAVY);
       return;
     }
 
-    console.log(weight, WEIGHT_BUFFER, weight + WEIGHT_BUFFER, ratedWeight)
-    if (weight + WEIGHT_BUFFER > ratedWeight) {
+    if (weight + WEIGHT_BUFFER > weightCapacity) {
       setNegativeMessage(VEHICLE_TOO_HEAVY);
       return;
     }
@@ -102,17 +101,14 @@ function App() {
     setPositiveMessage(RECOMMENDATIONS);
 
     const recommendations = [];
-
-    for (const [key, [weight, max_front, max_rear]] of Object.entries(RANGES)) {
-      if (weight > ratedWeight) continue;
-      if (front < max_front || rear < max_rear) continue;
+    for (const [key, [max_weight, max_front, max_rear]] of Object.entries(RANGES)) {
+      if (weight > max_weight) continue;
+      if (front > max_front || rear > max_rear) continue;
       recommendations.push(key);
     }
-
     setRecommendations(recommendations);
 
-  }, [towCap, aftermarket, tongueWeight, weight, front, rear, ratedWeight]);
-
+  }, [towCap, aftermarket, tongueWeight, weight, front, rear, weightCapacity]);
 
   return (
     <div className="App">
@@ -172,5 +168,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
