@@ -1,0 +1,227 @@
+<div class="container">
+  <style>
+    .fitrow {
+      font-size: 12pt;
+      padding-top: 10px;
+      font-weight: 600;
+      color: black;
+      line-height: 2;
+    }
+    .smallfont {
+      font-size: small;
+    }
+
+    .fitButton,
+    .LearnMoreLink {
+      background: #cc0000;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: bold;
+      font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      padding: 10px 20px;
+    }
+    .messageTitle {
+      font-size: 24pt;
+      padding: 40px 20px 20px 20px;
+      color: black;
+      font-weight: 800;
+    }
+    .messageBody {
+      padding: 20px;
+      font-size: 14pt;
+      font-weight: 400;
+      color: black;
+    }
+    .messageError {
+      color: #cc0000;
+      text-align: center;
+      padding: 20px;
+    }
+    .selectedCarrier {
+      padding-bottom: 40px;
+    }
+    .ControlLink {
+      font-size: 18pt;
+      color: black;
+      font-weight: 600;
+    }
+    .FeaturedItemsRating {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+    .lblPriceArea {
+      font-size: 14pt;
+      font-weight: 600;
+    }
+  </style>
+  <div class="row">
+    <div style="text-align: center; font-size: small">
+      <p>
+        Discover if you can haul a motorcycle with your vehicle and which
+        MotoTote works best for you.
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+      <div class="fitrow">
+        Vehicle Total Towing Capacity (lbs.)<br />
+        <input id="towCap" size="50" />
+      </div>
+      <div class="fitrow">
+        <input
+          type="checkbox"
+          id="chkAfterMarket"
+          name="chkAfterMarket"
+          onclick="AfterMarket()"
+        />
+        <label class="font-size: small;"> I have an after market hitch</label
+        ><br />
+        <div id="dvHitchTow" style="display: none">
+          Hitch Tongue Weight Capacity (lbs.)<br />
+          <input id="hitchTowCap" size="50" /><br />
+        </div>
+      </div>
+      <div class="fitrow">
+        Motorcycle Weight (lbs.)<br />
+        <input id="motorcycleWeight" size="50" /><br />
+      </div>
+      <div class="row">
+        <div class="fitrow col-sm-6">
+          Front Tire Width (in.)<br />
+          <input id="frontTire" size="20" /><br />
+        </div>
+        <div class="fitrow col-sm-6">
+          Back Tire Width (in.)<br />
+          <input id="backTire" size="20" /><br />
+        </div>
+      </div>
+      <div class="fitrow">
+        <button type="button" class="fitButton" onclick="Calculate()">
+          Calculate
+        </button>
+        <br />
+      </div>
+    </div>
+  </div>
+  <div><label id="lblMessage" style="text-align: center"> </label><br /></div>
+
+  <div class="row justify-content-center">
+    <div class="col-sm-4">
+      <div id="dvMaxCarrier" class="selectedCarrier" style="display: none">
+        $$PRODUCTDISPLAYMAX$$
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div id="dvPlusCarrier" class="selectedCarrier" style="display: none">
+        $$PRODUCTDISPLAYPLUS$$
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div id="dvM3Carrier" class="selectedCarrier" style="display: none">
+        $$PRODUCTDISPLAYM3$$
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div id="dvSportCarrier" class="selectedCarrier" style="display: none">
+        $$PRODUCTDISPLAYSPORT$$
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function AfterMarket() {
+    if (document.getElementById("chkAfterMarket").checked) {
+      document.getElementById("dvHitchTow").style = "display:block;";
+    } else {
+      document.getElementById("dvHitchTow").style = "display:none;";
+    }
+  }
+  function Calculate() {
+    var towCap = parseFloat(document.getElementById("towCap").value);
+    var afterMarket = document.getElementById("chkAfterMarket").checked;
+    var motorcycleWeight = parseFloat(
+      document.getElementById("motorcycleWeight").value
+    );
+    var frontTire = parseFloat(document.getElementById("frontTire").value);
+    var backTire = parseFloat(document.getElementById("backTire").value);
+
+    var ratedWeight = towCap * 0.1;
+    if (afterMarket == true) {
+      var hitchTowCap = parseFloat(
+        document.getElementById("hitchTowCap").value
+      );
+      var hitchRatedWeight = hitchTowCap;
+      if (hitchRatedWeight < ratedWeight) {
+        ratedWeight = hitchRatedWeight;
+      }
+    }
+
+    document.getElementById("dvM3Carrier").style = "display:none;";
+    document.getElementById("dvSportCarrier").style = "display:none;";
+    document.getElementById("dvMaxCarrier").style = "display:none;";
+    document.getElementById("dvPlusCarrier").style = "display:none;";
+    if (
+      isNaN(towCap) ||
+      isNaN(motorcycleWeight) ||
+      isNaN(frontTire) ||
+      isNaN(backTire)
+    ) {
+      document.getElementById("lblMessage").innerHTML =
+        "<div class='messageError'>Please input all the required fields.</div>";
+      return;
+    }
+
+    if (motorcycleWeight > 600.0) {
+      document.getElementById("lblMessage").innerHTML =
+        "<div class='messageTitle'>Sorry, your motorcycle's weight is heavier than recommended for a hitch carrier.</div><div class='messageBody'>With over 20 years designing and refining motorcycle hitch carriers, we do not recommend hauling more than 600 lbs on a hitch mounted rack. While we are working on developing solutions for heavier motorcycles, we currently do not have any products available for your motorcycle. Your safety is our top priority!<br>For more help, click the red chat icon to the right.</div>";
+      return;
+    }
+
+    if (motorcycleWeight + 60.0 > ratedWeight) {
+      document.getElementById("lblMessage").innerHTML =
+        "<div class='messageTitle'>Sorry, your vehicle isn't rated to haul your motorcycle's weight.</div><div class='messageBody'>The heaviest motorcycle your vehicle can safely haul with a hitch mount carrier is " +
+        (ratedWeight - 60.0) +
+        " lbs. To haul your motorcycle we recommend a vehicle with at least a " +
+        (motorcycleWeight + 60.0) * 10 +
+        " lbs. towing capacity and " +
+        (motorcycleWeight + 60.0) +
+        " lbs. hitch tongue weight capacity.<br>For more help, click the red chat icon to the right.</div>";
+      return;
+    }
+
+    if (frontTire > 5.5 || backTire > 9.0) {
+      document.getElementById("lblMessage").innerHTML =
+        "<div class='messageTitle'>Sorry, your motorcycle's tires are too wide for a MotoTote.</div><div class='messageBody'>While we offer among the widest tire tracks in the industry, we currently do not have a carrier that will fit your width of motorcycles tires. We are currently developing a new solution for wider tires.<br>For more help, click the red chat icon to the right.</div>";
+      return;
+    }
+
+    document.getElementById("lblMessage").innerHTML =
+      "<div class='messageTitle'>Your vehicle is rated to haul your motorcycle.</div><div class='messageBody'>For your motorcycle we recommend:</div>";
+
+    if (motorcycleWeight <= 500.0 && frontTire <= 4.75 && backTire <= 6.0) {
+      document.getElementById("dvM3Carrier").style = "display:block;";
+    } else {
+      document.getElementById("dvM3Carrier").style = "display:none;";
+    }
+
+    if (motorcycleWeight <= 600.0 && frontTire <= 5.0 && backTire <= 8.5) {
+      document.getElementById("dvSportCarrier").style = "display:block;";
+    } else {
+      document.getElementById("dvSportCarrier").style = "display:none;";
+    }
+
+    if (motorcycleWeight <= 600.0 && frontTire <= 4.75 && backTire <= 6.0) {
+      document.getElementById("dvMaxCarrier").style = "display:block;";
+    } else {
+      document.getElementById("dvMaxCarrier").style = "display:none;";
+    }
+
+    if (motorcycleWeight <= 600.0 && frontTire <= 5.5 && backTire <= 9.0) {
+      document.getElementById("dvPlusCarrier").style = "display:block;";
+    } else {
+      document.getElementById("dvPlusCarrier").style = "display:none;";
+    }
+  }
+</script>
