@@ -5,6 +5,8 @@
 .fit-calculator {
   max-width: 600px;
   margin: 0 auto;
+  position:relative;
+  z-index:1000000;
 }
 
 .fit-calculator .formField {
@@ -56,6 +58,7 @@
   opacity:0;
   transition:opacity 0.3s ease-in-out;
   overflow: auto;
+  z-index:2;
 }
 
 .fit-calculator .fit-calculator-container.modal.open {
@@ -70,6 +73,7 @@
   right:0;
   bottom:0;
   background-color:rgba(0,0,0,0.5);
+  z-index:1
 }
 
 .fit-calculator .modal-header {
