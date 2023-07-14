@@ -6,7 +6,7 @@
   max-width: 600px;
   margin: 0 auto;
   position:relative;
-  z-index:1000000;
+  z-index:10000000000;
 }
 
 .fit-calculator .formField {
@@ -46,7 +46,7 @@
 
 .fit-calculator .fit-calculator-container.modal {
   position:fixed;
-  top:1rem;
+  top:calc(1rem + 20px);
   left:1rem;
   right:1rem;
   max-width:600px;
