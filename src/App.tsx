@@ -155,7 +155,10 @@ function App() {
       {modalMode && (
         <button
           className="slide__btn btn btn--primary btn--small"
-          onClick={() => setModalOpen(true)}
+          onClick={(e) => {
+            setModalOpen(true);
+            e.preventDefault();
+          }}
           dangerouslySetInnerHTML={{ __html: MODAL_BUTTON_TEXT }}
         />
       )}
@@ -174,7 +177,10 @@ function App() {
         {modalMode && (
           <div className="modal-header">
             <h2 dangerouslySetInnerHTML={{ __html: MODAL_HEADER_TEXT }}></h2>
-            <button className="modal-close" onClick={() => setModalOpen(false)}>
+            <button className="modal-close" onClick={(e) => {
+              setModalOpen(false);
+              e.preventDefault();
+            }}>
               &times;
             </button>
           </div>
@@ -292,7 +298,10 @@ function App() {
           <div className="modal-footer">
             <button
               className="btn btn--primary btn--small"
-              onClick={() => setModalOpen(false)}
+              onClick={(e) => {
+                setModalOpen(false);
+                e.preventDefault();
+              }}
             >
               Close
             </button>
