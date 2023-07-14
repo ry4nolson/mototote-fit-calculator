@@ -38,16 +38,16 @@ const URLS = {
 
 // Error and success messages
 const MODAL_HEADER_TEXT = "MotoTote Fit Calculator";
-const BIKE_TOO_HEAVY = "Your bike is too heavy for any MotoTote.";
-const VEHICLE_TOO_WIMPY = `Your vehicle is not rated to haul your motorcycle. 
-  To haul your bike, you'll need a vehicle with 
-  ##TOWCAP## lbs. towing capacity. You can haul a bike weighing up to 
+const BIKE_TOO_HEAVY = "Your bike is too heavy for a MotoTote carrier.";
+const VEHICLE_TOO_WIMPY = `Your vehicle is not rated to haul your bike. 
+  To haul it, you'll need a vehicle with 
+  ##TOWCAP## lbs. towing capacity. You can haul a motorcycle or scooter weighing up to 
   ##BIKEMAX## lbs. with this vehicle.`;
-const HITCH_TOO_WIMPY = `Your hitch is not rated to haul your motorcycle. 
-  To haul your bike, you'll need a hitch with 
-  ##TOWCAP## lbs. tongue capacity. You can haul a bike weighing up to 
+const HITCH_TOO_WIMPY = `Your hitch is not rated to haul your bike. 
+  To haul it, you'll need a hitch with 
+  ##TOWCAP## lbs. tongue capacity. You can haul a motorcycle or scooter weighing up to 
   ##BIKEMAX## lbs. with this hitch.`;
-const TIRES_TOO_WIDE = `Sorry, your motorcycle's tires are too wide for a MotoTote. <br>
+const TIRES_TOO_WIDE = `Sorry, your tires are too wide for a MotoTote. <br>
   While we offer among the widest tire tracks in the industry, we currently do not 
   have a carrier that will fit your width of motorcycles tires. <br>
   We are currently developing a new solution for wider tires.  <br>
