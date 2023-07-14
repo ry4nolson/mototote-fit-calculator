@@ -67,15 +67,15 @@ const REAR_WHEEL_WIDTH = "Rear Wheel Width";
 // You probably don't need to edit anything past this point.
 
 function App() {
-  const [towCap, setTowCap] = useState(0);
-  const [aftermarket, setAftermarket] = useState(false);
-  const [tongueWeight, setTongueWeight] = useState(0);
-  const [weight, setWeight] = useState(0);
-  const [front, setFront] = useState(0);
-  const [rear, setRear] = useState(0);
-  const [negativeMessage, setNegativeMessage] = useState("");
-  const [positiveMessage, setPositiveMessage] = useState("");
-  const [recommendations, setRecommendations] = useState([]);
+  const [towCap, setTowCap] = useState<number>(0);
+  const [aftermarket, setAftermarket] = useState<boolean>(false);
+  const [tongueWeight, setTongueWeight] = useState<number>(0);
+  const [weight, setWeight] = useState<number>(0);
+  const [front, setFront] = useState<number>(0);
+  const [rear, setRear] = useState<number>(0);
+  const [negativeMessage, setNegativeMessage] = useState<string>("");
+  const [positiveMessage, setPositiveMessage] = useState<string>("");
+  const [recommendations, setRecommendations] = useState<string[]>([]);
 
   const weightCapacity = aftermarket ?
     tongueWeight < towCap ? tongueWeight : 0 :
@@ -95,8 +95,8 @@ function App() {
 
     if (weight + WEIGHT_BUFFER > weightCapacity) {
       let weightMessage = aftermarket ? HITCH_TOO_WIMPY : VEHICLE_TOO_WIMPY;
-      weightMessage = weightMessage.replace("##TOWCAP##", aftermarket ? (weightCapacity + WEIGHT_BUFFER) : (weightCapacity + WEIGHT_BUFFER) * 10);
-      weightMessage = weightMessage.replace("##BIKEMAX##", weightCapacity - WEIGHT_BUFFER);
+      weightMessage = weightMessage.replace("##TOWCAP##", `${aftermarket ? (weightCapacity + WEIGHT_BUFFER) : (weightCapacity + WEIGHT_BUFFER) * 10}`);
+      weightMessage = weightMessage.replace("##BIKEMAX##", `${weightCapacity - WEIGHT_BUFFER}`);
       setNegativeMessage(weightMessage);
       return;
     }
@@ -108,7 +108,7 @@ function App() {
 
     setPositiveMessage(RECOMMENDATIONS);
 
-    const recommendations = [];
+    const recommendations : string[] = [];
     for (const [key, [max_weight, max_front, max_rear]] of Object.entries(RANGES)) {
       if (weight > max_weight) continue;
       if (front > max_front || rear > max_rear) continue;
@@ -134,7 +134,7 @@ function App() {
 
       <div>
         <label>
-          <input type="checkbox" value={aftermarket} onChange={e => setAftermarket(e.target.checked)} />
+          <input type="checkbox" value={`${aftermarket}`} onChange={e => setAftermarket(e.target.checked)} />
           <span className="formLabel" dangerouslySetInnerHTML={{ __html: AFTERMARKET_HITCH }} />
         </label>
       </div>
