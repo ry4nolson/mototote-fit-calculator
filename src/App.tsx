@@ -1,5 +1,6 @@
 //ignore this please
 import React, { useEffect, useState } from 'react';
+import Product from './components/Product';
 
 
 // Constants and configuration
@@ -26,12 +27,23 @@ const RANGES = {
   "maxPlus": MAX_PLUS_RANGE
 };
 
+const URLS = {
+  "m3" : "https://mototote.com/products/m3-motorcycle-hitch-carrier.json",
+  "sport" : "https://mototote.com/products/sport-motorcycle-hitch-carrier.json",
+  "max" : "https://mototote.com/products/max-motorcycle-carrier-1.json",
+  "maxPlus" : "https://mototote.com/products/max-plus-motorcycle-carrier.json"
+};
+
 // Error and success messages
 const BIKE_TOO_HEAVY = "Your bike is too heavy for any MotoTote.";
-const VEHICLE_TOO_WIMPY = `To haul your bike, you'll need a vehicle with 
+const VEHICLE_TOO_WIMPY = 
+  `Your vehicle is not rated to haul your motorcycle. 
+  To haul your bike, you'll need a vehicle with 
   ##TOWCAP## lbs. towing capacity. You can haul a bike weighing up to 
   ##BIKEMAX## lbs. with this vehicle.`;
-const HITCH_TOO_WIMPY = `To haul your bike, you'll need a hitch with 
+const HITCH_TOO_WIMPY = 
+  `Your hitch is not rated to haul your motorcycle. 
+  To haul your bike, you'll need a hitch with 
   ##TOWCAP## lbs. tongue capacity. You can haul a bike weighing up to 
   ##BIKEMAX## lbs. with this hitch.`;
 const TIRES_TOO_WIDE =
@@ -45,8 +57,6 @@ const RECOMMENDATIONS =
   For your motorcycle, we recommend: `
 
 // Page text and labels
-const HEADING = "Vehicle &amp; Bike Fit Calculator";
-const SUBHEADING = "Discover if you can haul a motorcycle with your vehicle and which MotoTote works best for you.";
 const VEHICLE_TOWING_CAPACITY = "Vehicle Total Towing Capacity (lbs.)";
 const AFTERMARKET_HITCH = "I have an aftermarket hitch";
 const HITCH_TONGUE_WEIGHT_CAPACITY = "Hitch Tongue Weight Capacity";
@@ -76,10 +86,29 @@ function App() {
   const [negativeMessage, setNegativeMessage] = useState<string>("");
   const [positiveMessage, setPositiveMessage] = useState<string>("");
   const [recommendations, setRecommendations] = useState<string[]>([]);
+  const [productInfo, setProductInfo] = useState<any[]>([]);
 
   const weightCapacity = aftermarket ?
     tongueWeight < towCap ? tongueWeight : 0 :
     towCap * 0.1
+
+  useEffect(() => {
+    (async () => {
+      // map URLS to { [key]: data}
+
+      const promises = Object.entries(URLS).map(async ([key, url]) => {
+        const response = await fetch(url);
+        const data = await response.json();
+        return [key, data.product];
+      });
+
+
+      const data = await Promise.all(promises);
+      const productInfo = Object.fromEntries(data);
+      setProductInfo(productInfo);
+
+    })();
+  }, []);
 
   useEffect(() => {
     setNegativeMessage("");
@@ -90,20 +119,13 @@ function App() {
 
     if (weight > MAX_WEIGHT) {
       setNegativeMessage(BIKE_TOO_HEAVY);
-      return;
-    }
-
-    if (weight + WEIGHT_BUFFER > weightCapacity) {
+    } else if (weight + WEIGHT_BUFFER > weightCapacity) {
       let weightMessage = aftermarket ? HITCH_TOO_WIMPY : VEHICLE_TOO_WIMPY;
       weightMessage = weightMessage.replace("##TOWCAP##", `${aftermarket ? (weight + WEIGHT_BUFFER) : (weight + WEIGHT_BUFFER) * 10}`);
       weightMessage = weightMessage.replace("##BIKEMAX##", `${weightCapacity - WEIGHT_BUFFER}`);
       setNegativeMessage(weightMessage);
-      return;
-    }
-
-    if (front > MAX_FRONT || rear > MAX_REAR) {
+    } else if (front > MAX_FRONT || rear > MAX_REAR) {
       setNegativeMessage(TIRES_TOO_WIDE);
-      return;
     }
 
     setPositiveMessage(RECOMMENDATIONS);
@@ -119,12 +141,7 @@ function App() {
   }, [towCap, aftermarket, tongueWeight, weight, front, rear, weightCapacity]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1 dangerouslySetInnerHTML={{ __html: HEADING }} />
-        <p dangerouslySetInnerHTML={{ __html: SUBHEADING }} />
-      </header>
-
+    <div className="fit-calculator">
       <div className="formField">
         <label>
           <div className="formLabel" dangerouslySetInnerHTML={{ __html: VEHICLE_TOWING_CAPACITY }} />
@@ -171,7 +188,7 @@ function App() {
       {positiveMessage && <div className="positiveMessage" dangerouslySetInnerHTML={{ __html: positiveMessage }} />}
 
       {recommendations.length > 0 && <div className="recommendations">
-        {recommendations.map(r => <div key={r}>{r}</div>)}
+        {recommendations.map(r => <Product key={r} product={productInfo[r]} />)}
       </div>}
     </div>
   );

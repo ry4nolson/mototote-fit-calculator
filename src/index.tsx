@@ -8,24 +8,36 @@ const root = ReactDOM.createRoot(document.getElementById('fit-calculator')!);
 root.render(
   <React.StrictMode>
     <style dangerouslySetInnerHTML={{ __html: `
-* {
+.fit-calculator * {
   box-sizing: border-box;
 }
-.formField {
+.fit-calculator {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.fit-calculator .formField {
   padding:0.5rem 0;
 }
-.formLabel {
+.fit-calculator .formLabel {
   font-weight:600;
   margin-bottom:0.25rem;
 }
-.formField input:not([type="checkbox"]) {
-
+.fit-calculator .formField input:not([type="checkbox"]) {
+  width:100%;
 }
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+.fit-calculator input[type=number]::-webkit-inner-spin-button,
+.fit-calculator input[type=number]::-webkit-outer-spin-button {
   opacity: 1;
   height:40px;
   -webkit-appearance: auto;
+}
+.fit-calculator .recommendations {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.fit-calculator .product {
+  width:200px;
 }
     `}} />
     <App />
