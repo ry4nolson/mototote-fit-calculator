@@ -1,6 +1,7 @@
 //ignore this please
 import React, { useEffect, useState } from 'react';
-import Product from './components/Product';
+import ProductCard from './components/Product';
+import { Product } from './types/Product.type';
 
 
 // Constants and configuration
@@ -86,7 +87,7 @@ function App() {
   const [negativeMessage, setNegativeMessage] = useState<string>("");
   const [positiveMessage, setPositiveMessage] = useState<string>("");
   const [recommendations, setRecommendations] = useState<string[]>([]);
-  const [productInfo, setProductInfo] = useState<any[]>([]);
+  const [productInfo, setProductInfo] = useState<{ [key : string] : Product}>({});
 
   const weightCapacity = aftermarket ?
     tongueWeight < towCap ? tongueWeight : 0 :
@@ -188,7 +189,7 @@ function App() {
       {positiveMessage && <div className="positiveMessage" dangerouslySetInnerHTML={{ __html: positiveMessage }} />}
 
       {recommendations.length > 0 && <div className="recommendations">
-        {recommendations.map(r => <Product key={r} product={productInfo[r]} />)}
+        {recommendations.map((r : string) => <ProductCard key={r} product={productInfo[r] as Product} />)}
       </div>}
     </div>
   );
