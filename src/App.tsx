@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "./components/Product";
 import { Product } from "./types/Product.type";
 
-window["FIT_CALCULATOR_MODAL_MODE"] = true;
+//window["FIT_CALCULATOR_MODAL_MODE"] = true;
 
 // Constants and configuration
 //maximum bike weight for a mototote
