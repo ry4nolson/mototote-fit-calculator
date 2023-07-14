@@ -53,9 +53,7 @@ const TIRES_TOO_WIDE =
   have a carrier that will fit your width of motorcycles tires. <br>
   We are currently developing a new solution for wider tires.  <br>
   For more help, click the red chat icon to the right.`;
-const RECOMMENDATIONS =
-  `Your vehicle is rated to haul your motorcycle. <br>
-  For your motorcycle, we recommend: `
+const RECOMMENDATIONS = `For your motorcycle, we recommend: `
 
 // Page text and labels
 const VEHICLE_TOWING_CAPACITY = "Vehicle Total Towing Capacity (lbs.)";
