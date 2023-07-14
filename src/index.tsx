@@ -19,13 +19,13 @@ root.render(
   margin-bottom:0.25rem;
 }
 .formField input:not([type="checkbox"]) {
-  padding:12px 0 12px 20px;
-  width:100%;
+
 }
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   opacity: 1;
   height:40px;
+  -webkit-appearance: auto;
 }
     `}} />
     <App />

@@ -95,7 +95,7 @@ function App() {
 
     if (weight + WEIGHT_BUFFER > weightCapacity) {
       let weightMessage = aftermarket ? HITCH_TOO_WIMPY : VEHICLE_TOO_WIMPY;
-      weightMessage = weightMessage.replace("##TOWCAP##", `${aftermarket ? (weightCapacity + WEIGHT_BUFFER) : (weightCapacity + WEIGHT_BUFFER) * 10}`);
+      weightMessage = weightMessage.replace("##TOWCAP##", `${aftermarket ? (weight + WEIGHT_BUFFER) : (weight + WEIGHT_BUFFER) * 10}`);
       weightMessage = weightMessage.replace("##BIKEMAX##", `${weightCapacity - WEIGHT_BUFFER}`);
       setNegativeMessage(weightMessage);
       return;
