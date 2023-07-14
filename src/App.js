@@ -28,7 +28,12 @@ const RANGES = {
 
 // Error and success messages
 const BIKE_TOO_HEAVY = "Your bike is too heavy for any MotoTote.";
-const VEHICLE_TOO_HEAVY = "Your bike is too heavy for this vehicle.";
+const VEHICLE_TOO_WIMPY = `To haul your bike, you'll need a vehicle with 
+  ##TOWCAP## lbs. towing capacity. You can haul a bike weighing up to 
+  ##BIKEMAX## lbs. with this vehicle.`;
+const HITCH_TOO_WIMPY = `To haul your bike, you'll need a hitch with 
+  ##TOWCAP## lbs. tongue capacity. You can haul a bike weighing up to 
+  ##BIKEMAX## lbs. with this hitch.`;
 const TIRES_TOO_WIDE =
   `Sorry, your motorcycle's tires are too wide for a MotoTote. <br>
   While we offer among the widest tire tracks in the industry, we currently do not 
@@ -89,7 +94,10 @@ function App() {
     }
 
     if (weight + WEIGHT_BUFFER > weightCapacity) {
-      setNegativeMessage(VEHICLE_TOO_HEAVY);
+      let weightMessage = aftermarket ? HITCH_TOO_WIMPY : VEHICLE_TOO_WIMPY;
+      weightMessage = weightMessage.replace("##TOWCAP##", aftermarket ? weightCapacity : weightCapacity * 10);
+      weightMessage = weightMessage.replace("##BIKEMAX##", weightCapacity - WEIGHT_BUFFER);
+      setNegativeMessage(weightMessage);
       return;
     }
 
