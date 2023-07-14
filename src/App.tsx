@@ -55,7 +55,7 @@ const MODAL_BUTTON_TEXT = "Fit Calculator";
 
 // Page text and labels
 const VEHICLE_TOWING_CAPACITY = "Vehicle Total Towing Capacity (lbs.)";
-const AFTERMARKET_HITCH = "I have an aftermarket hitch";
+const AFTERMARKET_HITCH = " I have an aftermarket hitch";
 const HITCH_TONGUE_WEIGHT_CAPACITY = "Hitch Tongue Weight Capacity";
 const BIKE_WEIGHT = "Bike Weight";
 const FRONT_WHEEL_WIDTH = "Front Wheel Width";
