@@ -126,13 +126,13 @@ function App() {
       const productInfo = Object.fromEntries(data);
       setProductInfo(productInfo);
 
-      // //for testing
-      // setTowCap(5000);
-      // setAftermarket(false);
-      // setWeight(400);
-      // setFront(4.5);
-      // setRear(5.5);
-      // setModalOpen(true);
+      //for testing
+      setTowCap(5000);
+      setAftermarket(false);
+      setWeight(400);
+      setFront(4.5);
+      setRear(5.5);
+      setModalOpen(true);
     })();
   }, []);
 
@@ -170,8 +170,6 @@ function App() {
       setNegativeMessage(TIRES_TOO_WIDE);
     }
 
-    setPositiveMessage(RECOMMENDATIONS);
-
     const recommendations: string[] = [];
     for (const [key, [max_weight, max_front, max_rear]] of Object.entries(
       RANGES
@@ -181,10 +179,13 @@ function App() {
       recommendations.push(key);
     }
     setRecommendations(recommendations);
+    if (recommendations.length > 0) {
+      setPositiveMessage(RECOMMENDATIONS);
+    }
   }, [towCap, aftermarket, tongueWeight, weight, front, rear, weightCapacity]);
 
   return (
-    <div className="fit-calculator">
+    <div className={`fit-calculator ${modalMode ? "modal-mode" : ""}`}>
       {modalMode && modalOpen && (
         <div
           className="fit-modal__overlay"
