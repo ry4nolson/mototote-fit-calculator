@@ -86,10 +86,24 @@ function App() {
     {}
   );
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [showModalButton, setShowModalButton] = useState<boolean>(false);
 
   const modalMode: boolean =
     "FIT_CALCULATOR_MODAL_MODE" in window &&
     window["FIT_CALCULATOR_MODAL_MODE"] === true;
+
+  useEffect(() => {
+    if (modalMode) {
+      document.addEventListener("mousedown", (e) => {
+        const el = e.target as HTMLElement;
+        if (el.classList.contains("fit-modal-trigger")) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          setModalOpen(true);
+        }
+      });
+    }
+  }, [modalMode]);
 
   const weightCapacity = aftermarket
     ? tongueWeight < towCap
@@ -154,16 +168,6 @@ function App() {
 
   return (
     <div className="fit-calculator">
-      {modalMode && (
-        <button
-          className="slide__btn btn btn--primary btn--small"
-          onClick={(e) => {
-            setModalOpen(true);
-            e.preventDefault();
-          }}
-          dangerouslySetInnerHTML={{ __html: MODAL_BUTTON_TEXT }}
-        />
-      )}
       {modalMode && modalOpen && (
         <div
           className="fit-modal__overlay"
