@@ -2,9 +2,349 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <title>MotoTote Vehicle and Bike Fit Calculator</title>
+
+    <link
+      rel="preload"
+      as="style"
+      href="//mototote.com/cdn/shop/t/17/assets/theme.css?v=88190700811824389511685974912"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="//mototote.com/cdn/shop/t/17/assets/loading.svg?v=91665432863842511931683113968"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.shopify.com/s/files/1/0722/7801/6314/files/PrentonRPUltraCondMed-Regular.woff?v=1683210438"
+    />
+
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.shopify.com" crossorigin />
+    <link
+      rel="preconnect"
+      href="https://monorail-edge.shopifysvc.com"
+      crossorigin
+    />
+    <style data-shopify>
+      @font-face {
+        font-family: "Roboto Condensed";
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+        src: url("//mototote.com/cdn/fonts/roboto_condensed/robotocondensed_n7.a8dcc495520a7cc0e796688956d83e7a5274e247.woff2?h1=bW90b3RvdGUuYWNjb3VudC5teXNob3BpZnkuY29t&h2=bW90b3RvdGUuY29t&hmac=bc1837d8da35ae65e800cff4c2e9f9725a18c1f10c732e95795a0c8ab446c0e3")
+            format("woff2"),
+          url("//mototote.com/cdn/fonts/roboto_condensed/robotocondensed_n7.42ef03157aa2a002e25bb3dfa99c3e6719fa428a.woff?h1=bW90b3RvdGUuYWNjb3VudC5teXNob3BpZnkuY29t&h2=bW90b3RvdGUuY29t&hmac=da92976465ea260c822a79e25e8a891ac9ae8105644bc56aca6e58a73c8d1146")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: Helvetica;
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+        src: url("//mototote.com/cdn/fonts/helvetica/helvetica_n4.fe093fe9ca22a15354813c912484945a36b79146.woff2?h1=bW90b3RvdGUuYWNjb3VudC5teXNob3BpZnkuY29t&h2=bW90b3RvdGUuY29t&hmac=4a4937099dd556f0a1c1f3cb5d5102921739a8d1b4bd913f43e7bfd32abbcec4")
+            format("woff2"),
+          url("//mototote.com/cdn/fonts/helvetica/helvetica_n4.8bddb85c18a0094c427a9bf65dee963ad88de4e8.woff?h1=bW90b3RvdGUuYWNjb3VudC5teXNob3BpZnkuY29t&h2=bW90b3RvdGUuY29t&hmac=fca5760194699cc633c76bc584fafc34a5fa1a946deee6a1a477cecff587ce53")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: "Roboto Condensed";
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+        src: url("//mototote.com/cdn/fonts/roboto_condensed/robotocondensed_n7.a8dcc495520a7cc0e796688956d83e7a5274e247.woff2?h1=bW90b3RvdGUuYWNjb3VudC5teXNob3BpZnkuY29t&h2=bW90b3RvdGUuY29t&hmac=bc1837d8da35ae65e800cff4c2e9f9725a18c1f10c732e95795a0c8ab446c0e3")
+            format("woff2"),
+          url("//mototote.com/cdn/fonts/roboto_condensed/robotocondensed_n7.42ef03157aa2a002e25bb3dfa99c3e6719fa428a.woff?h1=bW90b3RvdGUuYWNjb3VudC5teXNob3BpZnkuY29t&h2=bW90b3RvdGUuY29t&hmac=da92976465ea260c822a79e25e8a891ac9ae8105644bc56aca6e58a73c8d1146")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: "Roboto Condensed";
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+        src: url("//mototote.com/cdn/fonts/roboto_condensed/robotocondensed_n4.901867ac1fae62a138ed9ec7898623d714425105.woff2?h1=bW90b3RvdGUuYWNjb3VudC5teXNob3BpZnkuY29t&h2=bW90b3RvdGUuY29t&hmac=4a3f88b48246a7b251446a84516d4cae19456c0338ea66f35ed018f6bf40dc2a")
+            format("woff2"),
+          url("//mototote.com/cdn/fonts/roboto_condensed/robotocondensed_n4.c3228efde738d250ea3586f81d19645b192589ab.woff?h1=bW90b3RvdGUuYWNjb3VudC5teXNob3BpZnkuY29t&h2=bW90b3RvdGUuY29t&hmac=0ecf75688c22118334a0f0df9cadc136d9c16a0e86dd0537ecb61e082453db0b")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: Helvetica;
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+        src: url("//mototote.com/cdn/fonts/helvetica/helvetica_n3.e01288c0d2e8e4f4101819b750499a38c41ed953.woff2?h1=bW90b3RvdGUuYWNjb3VudC5teXNob3BpZnkuY29t&h2=bW90b3RvdGUuY29t&hmac=8690ec5b3cd412824af743b335203875f8747b836c65c1b8fc7181ee379f2f73")
+            format("woff2"),
+          url("//mototote.com/cdn/fonts/helvetica/helvetica_n3.689236138e1e3e1b03386488943f79b29e240af5.woff?h1=bW90b3RvdGUuYWNjb3VudC5teXNob3BpZnkuY29t&h2=bW90b3RvdGUuY29t&hmac=6ac0e71751f0c2e99ae7ee3cef39521af99475e5201b02358538715225a0e475")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: Helvetica;
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+        src: url("//mototote.com/cdn/fonts/helvetica/helvetica_n7.39bee04bd277a9c4e94e2fd42d53f4e3c0afb8a5.woff2?h1=bW90b3RvdGUuYWNjb3VudC5teXNob3BpZnkuY29t&h2=bW90b3RvdGUuY29t&hmac=1b582718a2b2ea327c2c9803935337149dc1e892c3b76d05bd52ae05cf8a5da0")
+            format("woff2"),
+          url("//mototote.com/cdn/fonts/helvetica/helvetica_n7.b95359461a6788d5549e702cb2123bc40c227e49.woff?h1=bW90b3RvdGUuYWNjb3VudC5teXNob3BpZnkuY29t&h2=bW90b3RvdGUuY29t&hmac=e0fb640183b4dd6c1686bf7cfad46c32ed55a57467ec0b5d9bf526c4d15078a7")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: Helvetica;
+        font-weight: 400;
+        font-style: oblique;
+        font-display: swap;
+        src: url("//mototote.com/cdn/fonts/helvetica/helvetica_o4.f9832a0fc1ee8fc5a359636e410d6941e1e4ca03.woff2?h1=bW90b3RvdGUuYWNjb3VudC5teXNob3BpZnkuY29t&h2=bW90b3RvdGUuY29t&hmac=6935e1ed0cad7673d00dcd96f53701189d898911faf683b815105ad7179d58c0")
+            format("woff2"),
+          url("//mototote.com/cdn/fonts/helvetica/helvetica_o4.0063286aec443697ebae04eeb9c78b820f9f7805.woff?h1=bW90b3RvdGUuYWNjb3VudC5teXNob3BpZnkuY29t&h2=bW90b3RvdGUuY29t&hmac=7996fa610f12d950f209d14bfc1d3af69744e3bd79cb16e93bad3dfbc4a0b5b9")
+            format("woff");
+      }
+
+      @font-face {
+        font-family: Helvetica;
+        font-weight: 700;
+        font-style: oblique;
+        font-display: swap;
+        src: url("//mototote.com/cdn/fonts/helvetica/helvetica_o7.215fd4ca1a06214fa01e44328a1992c977700ea2.woff2?h1=bW90b3RvdGUuYWNjb3VudC5teXNob3BpZnkuY29t&h2=bW90b3RvdGUuY29t&hmac=68a8fabda9af63a0d3aba57b360cd43dcfaa46528692d572155a8679c32c9762")
+            format("woff2"),
+          url("//mototote.com/cdn/fonts/helvetica/helvetica_o7.b0a2026ae2aa64d060f9ce0ee1b3c3c1aa21bf88.woff?h1=bW90b3RvdGUuYWNjb3VudC5teXNob3BpZnkuY29t&h2=bW90b3RvdGUuY29t&hmac=9d508f1fc4b084c3ca28d28982b0011a6819d29a0c2724306da8221345eaf170")
+            format("woff");
+      }
+
+      :root {
+        --COLOR-BUTTON-PRIMARY-BG: #cc0000;
+        --COLOR-BUTTON-PRIMARY-BG-HOVER: #000000;
+        --PRIMARY-BG-TRANSITION: background 0s linear 0s;
+        --PRIMARY-BG-TRANSITION-HOVER: background 0s linear 0.3s;
+        --COLOR-BUTTON-PRIMARY-TEXT: #ffffff;
+        --COLOR-BUTTON-PRIMARY-TEXT-HOVER: #ffffff;
+        --COLOR-BUTTON-PRIMARY-BORDER: #cc0000;
+        --PRIMARY-BUTTON-BORDER: var(--BORDER-WIDTH) solid
+          var(--COLOR-BUTTON-PRIMARY-BORDER);
+        --COLOR-BUTTON-PRIMARY-BORDER-HOVER: #000000;
+        --PRIMARY-BUTTON-BORDER-HOVER: var(--BORDER-WIDTH) solid
+          var(--COLOR-BUTTON-PRIMARY-BORDER-HOVER);
+        --COLOR-BUTTON-PRIMARY-FADE: rgba(204, 0, 0, 0.05);
+        --COLOR-BUTTON-PRIMARY-BG-ALPHA-50: rgba(204, 0, 0, 0.5);
+        --COLOR-BUTTON-PRIMARY-TEXT-ALPHA-50: rgba(255, 255, 255, 0.5);
+
+        --COLOR-BUTTON-SECONDARY-BG: #ffffff;
+        --COLOR-BUTTON-SECONDARY-BG-HOVER: #f7f7f7;
+        --SECONDARY-BG-TRANSITION: background 0s linear 0s;
+        --SECONDARY-BG-TRANSITION-HOVER: background 0s linear 0.3s;
+        --COLOR-BUTTON-SECONDARY-TEXT: #000000;
+        --COLOR-BUTTON-SECONDARY-TEXT-HOVER: #000000;
+        --COLOR-BUTTON-SECONDARY-BORDER: #000000;
+        --SECONDARY-BUTTON-BORDER: var(--BORDER-WIDTH) solid
+          var(--COLOR-BUTTON-SECONDARY-BORDER);
+        --COLOR-BUTTON-SECONDARY-BORDER-HOVER: #000000;
+        --SECONDARY-BUTTON-BORDER-HOVER: var(--BORDER-WIDTH) solid
+          var(--COLOR-BUTTON-SECONDARY-BORDER-HOVER);
+        --COLOR-BUTTON-SECONDARY-TEXT-ALPHA-50: rgba(0, 0, 0, 0.5);
+
+        --COLOR-HEADING: #000;
+        --COLOR-TEXT: #000;
+        --COLOR-TEXT-DARKEN: #000000;
+        --COLOR-TEXT-LIGHTEN: #333333;
+        --COLOR-TEXT-ALPHA-5: rgba(0, 0, 0, 0.05);
+        --COLOR-TEXT-ALPHA-8: rgba(0, 0, 0, 0.08);
+        --COLOR-TEXT-ALPHA-10: rgba(0, 0, 0, 0.1);
+        --COLOR-TEXT-ALPHA-15: rgba(0, 0, 0, 0.15);
+        --COLOR-TEXT-ALPHA-20: rgba(0, 0, 0, 0.2);
+        --COLOR-TEXT-ALPHA-25: rgba(0, 0, 0, 0.25);
+        --COLOR-TEXT-ALPHA-50: rgba(0, 0, 0, 0.5);
+        --COLOR-TEXT-ALPHA-60: rgba(0, 0, 0, 0.6);
+        --COLOR-TEXT-ALPHA-85: rgba(0, 0, 0, 0.85);
+
+        --COLOR-BG: #ffffff;
+        --COLOR-BG-ALPHA-25: rgba(255, 255, 255, 0.25);
+        --COLOR-BG-ALPHA-35: rgba(255, 255, 255, 0.35);
+        --COLOR-BG-ALPHA-60: rgba(255, 255, 255, 0.6);
+        --COLOR-BG-ALPHA-65: rgba(255, 255, 255, 0.65);
+        --COLOR-BG-ALPHA-85: rgba(255, 255, 255, 0.85);
+        --COLOR-BG-OVERLAY: rgba(255, 255, 255, 0.75);
+        --COLOR-BG-DARKEN: #e6e6e6;
+        --COLOR-BG-LIGHTEN-DARKEN: #e6e6e6;
+        --COLOR-BG-LIGHTEN-DARKEN-2: #cdcdcd;
+        --COLOR-BG-LIGHTEN-DARKEN-3: #b3b3b3;
+        --COLOR-BG-LIGHTEN-DARKEN-4: #9a9a9a;
+        --COLOR-BG-LIGHTEN-DARKEN-CONTRAST: #b3b3b3;
+        --COLOR-BG-LIGHTEN-DARKEN-CONTRAST-2: #999999;
+        --COLOR-BG-LIGHTEN-DARKEN-CONTRAST-3: #808080;
+        --COLOR-BG-LIGHTEN-DARKEN-CONTRAST-4: #666666;
+
+        --COLOR-BG-SECONDARY: #d90000;
+        --COLOR-BG-SECONDARY-LIGHTEN-DARKEN: #ff0d0d;
+        --COLOR-BG-SECONDARY-LIGHTEN-DARKEN-CONTRAST: #ffd9d9;
+
+        --COLOR-BG-ACCENT: #f7f7f7;
+
+        --COLOR-INPUT-BG: #ffffff;
+
+        --COLOR-ACCENT: #d43747;
+        --COLOR-ACCENT-TEXT: #fff;
+
+        --COLOR-TAG-SAVING: #d43747;
+        --COLOR-TAG-SAVING-TEXT: #fff;
+
+        --COLOR-TAG-CUSTOM: #cc0000;
+        --COLOR-TAG-TEXT: #fff;
+
+        --COLOR-BORDER: #d3d3d3;
+        --COLOR-BORDER-ALPHA-15: rgba(211, 211, 211, 0.15);
+        --COLOR-BORDER-ALPHA-30: rgba(211, 211, 211, 0.3);
+        --COLOR-BORDER-ALPHA-50: rgba(211, 211, 211, 0.5);
+        --COLOR-BORDER-ALPHA-65: rgba(211, 211, 211, 0.65);
+        --COLOR-BORDER-LIGHTEN-DARKEN: #868686;
+        --COLOR-BORDER-HAIRLINE: #f7f7f7;
+
+        --COLOR-WHITE-BLACK: fff;
+        --COLOR-BLACK-WHITE: #000;
+        --COLOR-DISABLED-GREY: rgba(0, 0, 0, 0.05);
+        --COLOR-DISABLED-GREY-DARKEN: rgba(0, 0, 0, 0.45);
+        --COLOR-ERROR: #d02e2e;
+        --COLOR-ERROR-BG: #f3cbcb;
+        --COLOR-SUCCESS: #56ad6a;
+        --COLOR-SUCCESS-BG: #ecfef0;
+        --COLOR-WARN: #ecbd5e;
+        --COLOR-TRANSPARENT: rgba(255, 255, 255, 0);
+        --COLOR-WHITE: #fff;
+        --COLOR-WHITE-ALPHA-50: rgba(255, 255, 255, 0.5);
+        --COLOR-WHITE-ALPHA-60: rgba(255, 255, 255, 0.6);
+        --COLOR-BLACK: #000;
+        --COLOR-BLACK-ALPHA-20: rgba(0, 0, 0, 0.2);
+        --COLOR-BLACK-ALPHA-50: rgba(0, 0, 0, 0.5);
+        --COLOR-BLACK-ALPHA-60: rgba(0, 0, 0, 0.6);
+        --FONT-STACK-BODY: Helvetica, "Helvetica Neue", Arial, "Lucida Grande",
+          sans-serif;
+        --FONT-STYLE-BODY: normal;
+        --FONT-STYLE-BODY-ITALIC: oblique;
+        --FONT-ADJUST-BODY: 1;
+
+        --FONT-WEIGHT-BODY: 400;
+        --FONT-WEIGHT-BODY-LIGHT: 300;
+        --FONT-WEIGHT-BODY-MEDIUM: 700;
+        --FONT-WEIGHT-BODY-BOLD: 700;
+
+        --FONT-STACK-HEADING: "Roboto Condensed", sans-serif;
+        --FONT-STYLE-HEADING: normal;
+        --FONT-STYLE-HEADING-ITALIC: italic;
+        --FONT-ADJUST-HEADING: 0.9;
+
+        --FONT-WEIGHT-HEADING: 700;
+        --FONT-WEIGHT-HEADING-LIGHT: 400;
+        --FONT-WEIGHT-HEADING-MEDIUM: 500;
+        --FONT-WEIGHT-HEADING-BOLD: 700;
+
+        --FONT-STACK-NAV: Helvetica, "Helvetica Neue", Arial, "Lucida Grande",
+          sans-serif;
+        --FONT-STYLE-NAV: normal;
+        --FONT-STYLE-NAV-ITALIC: oblique;
+        --FONT-ADJUST-NAV: 1;
+
+        --FONT-WEIGHT-NAV: 400;
+        --FONT-WEIGHT-NAV-LIGHT: 300;
+        --FONT-WEIGHT-NAV-MEDIUM: 700;
+        --FONT-WEIGHT-NAV-BOLD: 700;
+
+        --FONT-STACK-BUTTON: Helvetica, "Helvetica Neue", Arial, "Lucida Grande",
+          sans-serif;
+        --FONT-STYLE-BUTTON: normal;
+        --FONT-STYLE-BUTTON-ITALIC: oblique;
+        --FONT-ADJUST-BUTTON: 0.9;
+
+        --FONT-WEIGHT-BUTTON: 400;
+        --FONT-WEIGHT-BUTTON-MEDIUM: 700;
+        --FONT-WEIGHT-BUTTON-BOLD: 700;
+
+        --FONT-STACK-SUBHEADING: Helvetica, "Helvetica Neue", Arial,
+          "Lucida Grande", sans-serif;
+        --FONT-STYLE-SUBHEADING: normal;
+        --FONT-STYLE-SUBHEADING-ITALIC: oblique;
+        --FONT-ADJUST-SUBHEADING: 1;
+
+        --FONT-WEIGHT-SUBHEADING: 400;
+        --FONT-WEIGHT-SUBHEADING-LIGHT: 300;
+        --FONT-WEIGHT-SUBHEADING-MEDIUM: 700;
+        --FONT-WEIGHT-SUBHEADING-BOLD: 700;
+
+        --LETTER-SPACING-SUBHEADING: 0em;
+        --LETTER-SPACING-BUTTON: 0em;
+
+        --BUTTON-TEXT-CAPS: none;
+        --SUBHEADING-TEXT-CAPS: none;
+        --FONT-SIZE-INPUT: 1rem;
+        --RADIUS: 8px;
+        --RADIUS-SMALL: 8px;
+        --RADIUS-TINY: 8px;
+        --RADIUS-BADGE: 3px;
+        --RADIUS-CHECKBOX: 4px;
+        --RADIUS-TEXTAREA: 8px;
+        --PRODUCT-MEDIA-PADDING-TOP: 110%;
+        --BORDER-WIDTH: 1px;
+        --STROKE-WIDTH: 12px;
+        --SITE-WIDTH: 1440px;
+        --SITE-WIDTH-NARROW: 840px;
+        --ICON-ARROW-RIGHT: url("//mototote.com/cdn/shop/t/17/assets/icon-chevron-right.svg?v=115618353204357621731683113968");
+        --loading-svg: url("//mototote.com/cdn/shop/t/17/assets/loading.svg?v=91665432863842511931683113968");
+        --icon-check: url("//mototote.com/cdn/shop/t/17/assets/icon-check.svg?v=175316081881880408121683113968");
+        --icon-check-swatch: url("//mototote.com/cdn/shop/t/17/assets/icon-check-swatch.svg?v=131897745589030387781683113968");
+        --icon-zoom-in: url("//mototote.com/cdn/shop/t/17/assets/icon-zoom-in.svg?v=157433013461716915331683113968");
+        --icon-zoom-out: url("//mototote.com/cdn/shop/t/17/assets/icon-zoom-out.svg?v=164909107869959372931683113968");
+        --collection-sticky-bar-height: 0;
+        --collection-image-padding-top: 60%;
+
+        --drawer-width: 400px;
+        --drawer-transition: transform 0.4s cubic-bezier(0.46, 0.01, 0.32, 1);
+        --full-height: 100vh;
+        --header-height: 60px;
+        --has-scrolled-header-height: 60px;
+        --announcement-height: 0px;
+        --content-full: calc(
+          100vh - var(--header-height) - var(--announcement-height)
+        );
+        --gutter: 60px;
+        --gutter-mobile: 20px;
+        --grid-gutter: 20px;
+        --grid-gutter-mobile: 35px;
+        --inner: 20px;
+        --inner-tablet: 18px;
+        --inner-mobile: 16px;
+        --grid: repeat(3, minmax(0, 1fr));
+        --grid-tablet: repeat(2, minmax(0, 1fr));
+        --grid-mobile: repeat(2, minmax(0, 1fr));
+        --megamenu-grid: repeat(4, minmax(0, 1fr));
+        --grid-row: 1 / span 3;
+        --scrollbar-width: 0px;
+        --overlay: #000;
+        --overlay-opacity: 1;
+        --swatch-width: 40px;
+        --swatch-height: 20px;
+        --swatch-size: 42px;
+        --swatch-size-mobile: 30px;
+
+        --move-offset: 20px;
+
+        --autoplay-speed: 2200ms;
+
+        --filter-bg: 1;
+        --product-filter-bg: 1;
+      }
+    </style>
+    <link
+      href="//mototote.com/cdn/shop/t/17/assets/theme.css?v=88190700811824389511685974912"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
