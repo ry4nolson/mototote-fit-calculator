@@ -72,6 +72,10 @@ const REAR_WHEEL_WIDTH = "Rear Wheel Width";
 //
 // You probably don't need to edit anything past this point.
 
+interface ProductMap {
+  [key: string]: Product;
+}
+
 function App() {
   const [towCap, setTowCap] = useState<number>(0);
   const [aftermarket, setAftermarket] = useState<boolean>(false);
@@ -82,11 +86,8 @@ function App() {
   const [negativeMessage, setNegativeMessage] = useState<string>("");
   const [positiveMessage, setPositiveMessage] = useState<string>("");
   const [recommendations, setRecommendations] = useState<string[]>([]);
-  const [productInfo, setProductInfo] = useState<{ [key: string]: Product }>(
-    {}
-  );
+  const [productInfo, setProductInfo] = useState<ProductMap>({});
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [showModalButton, setShowModalButton] = useState<boolean>(false);
 
   const modalMode: boolean =
     "FIT_CALCULATOR_MODAL_MODE" in window &&
@@ -126,6 +127,14 @@ function App() {
       setProductInfo(productInfo);
     })();
   }, []);
+
+  useEffect(() => {
+    if (modalMode && modalOpen) {
+      document.body.classList.add("fit-modal-open");
+    } else {
+      document.body.classList.remove("fit-modal-open");
+    }
+  }, [modalOpen]);
 
   useEffect(() => {
     setNegativeMessage("");

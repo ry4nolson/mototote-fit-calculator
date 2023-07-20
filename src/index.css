@@ -1,3 +1,6 @@
+body.fit-modal-open {
+  overflow:hidden;
+}
 .fit-calculator * {
   box-sizing: border-box;
 }
@@ -55,7 +58,7 @@
 
 .fit-calculator .fit-calculator-container.fit-modal {
   position:fixed;
-  top:calc(1rem + 20px);
+  top:1rem;
   left:1rem;
   right:1rem;
   max-width:600px;
@@ -67,10 +70,12 @@
   opacity:0;
   transition:opacity 0.3s ease-in-out;
   z-index:2;
+  overflow:hidden;
+  flex-direction: column;
 }
 
 .fit-calculator .fit-calculator-container.fit-modal.open {
-  display:block;
+  display:flex;
   opacity:1;
 }
 
@@ -97,10 +102,12 @@
 
 .fit-calculator .fit-modal .fit-form {
   overflow:auto;
-  max-height:600px;
+  flex:1;
+  padding:1rem 0;
 }
-
+ 
 .fit-calculator .fit-modal-footer {
   padding-top:1rem;
   border-top:1px solid #ccc;
+  background:#fff;
 }
