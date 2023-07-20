@@ -125,6 +125,14 @@ function App() {
       const data = await Promise.all(promises);
       const productInfo = Object.fromEntries(data);
       setProductInfo(productInfo);
+
+      // //for testing
+      // setTowCap(5000);
+      // setAftermarket(false);
+      // setWeight(400);
+      // setFront(4.5);
+      // setRear(5.5);
+      // setModalOpen(true);
     })();
   }, []);
 
