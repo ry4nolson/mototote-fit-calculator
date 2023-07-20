@@ -1,0 +1,17 @@
+body.fit-modal-open {
+  overflow:hidden;
+}
+.fit-calculator * {
+  box-sizing: border-box;
+}
+
+.fit-calculator {
+  position:relative;
+  z-index:10000000000;
+}
+
+.fit-calculator .fit-calculator-container {
+  background:#fff;
+  max-width:600px;
+  margin:0 auto;
+}

@@ -1,0 +1,19 @@
+.fit-calculator .formField {
+  padding: 0.5rem 0;
+}
+
+.fit-calculator .formLabel {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.fit-calculator .formField input:not([type="checkbox"]) {
+  width: 100%;
+}
+
+.fit-calculator input[type=number]::-webkit-inner-spin-button,
+.fit-calculator input[type=number]::-webkit-outer-spin-button {
+  opacity: 1;
+  height: 40px;
+  -webkit-appearance: auto;
+}
