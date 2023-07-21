@@ -128,12 +128,12 @@ function App() {
 
       // if dev mode
       if (import.meta.env.DEV){
-      setTowCap(5000);
-      setAftermarket(false);
-      setWeight(400);
-      setFront(4.5);
-      setRear(5.5);
-      setModalOpen(true);
+        setTowCap(5000);
+        setAftermarket(false);
+        setWeight(400);
+        setFront(4.5);
+        setRear(5.5);
+        setModalOpen(true);
       }
     })();
   }, []);
