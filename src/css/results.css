@@ -5,6 +5,12 @@
   grid-gap:1rem;
 }
 
+.fit-calculator h3 {
+  font-size:1.25rem;
+  margin:1rem 0;
+  padding:0;
+}
+
 .fit-calculator .product {
   width: 50%;
   margin-bottom: 1rem;

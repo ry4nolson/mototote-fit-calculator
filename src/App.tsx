@@ -38,20 +38,19 @@ const URLS = {
 
 // Error and success messages
 const MODAL_HEADER_TEXT = "MotoTote Fit Calculator";
-const BIKE_TOO_HEAVY = "Your bike is too heavy for a MotoTote carrier.";
-const VEHICLE_TOO_WIMPY = `Your vehicle is not rated to haul your bike. 
-  To haul it, you'll need a vehicle with 
-  ##TOWCAP## lbs. towing capacity. You can haul a motorcycle or scooter weighing up to 
-  ##BIKEMAX## lbs. with this vehicle.`;
-const HITCH_TOO_WIMPY = `Your hitch is not rated to haul your bike. 
-  To haul it, you'll need a hitch with 
-  ##TOWCAP## lbs. tongue capacity. You can haul a motorcycle or scooter weighing up to 
-  ##BIKEMAX## lbs. with this hitch.`;
-const TIRES_TOO_WIDE = `Sorry, your tires are too wide for a MotoTote. <br>
-  While we offer among the widest tire tracks in the industry, we currently do not 
-  have a carrier that will fit your width of motorcycles tires. <br>
-  We are currently developing a new solution for wider tires.  <br>
-  For more help, click the red chat icon to the right.`;
+const BIKE_TOO_HEAVY =
+  "<h3>Your bike is too heavy for a MotoTote carrier.</h3>";
+const VEHICLE_TOO_WIMPY = `<h3>Your vehicle is not rated to haul your bike.</h3> 
+  <p>To haul it, you'll need a vehicle with ##TOWCAP## lbs. towing capacity. </p>
+  <p>You can haul a motorcycle or scooter weighing up to ##BIKEMAX## lbs. with this vehicle.</p>`;
+const HITCH_TOO_WIMPY = `<h3>Your hitch is not rated to haul your bike. </h3>
+  <p>To haul it, you'll need a hitch with ##TOWCAP## lbs. tongue capacity.</p>
+  <p>You can haul a motorcycle or scooter weighing up to ##BIKEMAX## lbs. with this hitch.</p>`;
+const TIRES_TOO_WIDE = `<h3>Sorry, your tires are too wide for a MotoTote.</h3>
+  <p>While we offer among the widest tire tracks in the industry, we currently do not 
+  have a carrier that will fit your width of motorcycles tires.</p>
+  <p>We are currently developing a new solution for wider tires. </p>
+  <p>For more help, click the red chat icon to the right.</p>`;
 const RECOMMENDATIONS = `For your motorcycle, we recommend: `;
 const MODAL_BUTTON_TEXT = "Fit Calculator";
 
@@ -127,10 +126,10 @@ function App() {
       setProductInfo(productInfo);
 
       // if dev mode
-      if (import.meta.env.DEV){
+      if (import.meta.env.DEV) {
         setTowCap(5000);
         setAftermarket(false);
-        setWeight(400);
+        setWeight(500);
         setFront(4.5);
         setRear(5.5);
         setModalOpen(true);
