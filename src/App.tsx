@@ -1,9 +1,28 @@
-//ignore this please
-import React, { useEffect, useState } from "react";
-import ProductCard from "./components/Product";
-import { Product } from "./types/Product.type";
+// Error and success messages
+const MODAL_HEADER_TEXT = "MotoTote Fit Calculator";
+const BIKE_TOO_HEAVY =
+  "<h3>Your bike is too heavy for a MotoTote carrier.</h3>";
+const VEHICLE_TOO_WIMPY = `<h3>Your vehicle is not rated to haul your bike.</h3> 
+  <p>To haul it, you'll need a vehicle with ##TOWCAP## lbs. towing capacity. </p>
+  <p>You can haul a motorcycle or scooter weighing up to ##BIKEMAX## lbs. with this vehicle.</p>`;
+const HITCH_TOO_WIMPY = `<h3>Your hitch is not rated to haul your bike. </h3>
+  <p>To haul it, you'll need a hitch with ##TOWCAP## lbs. tongue capacity.</p>
+  <p>You can haul a motorcycle or scooter weighing up to ##BIKEMAX## lbs. with this hitch.</p>`;
+const TIRES_TOO_WIDE = `<h3>Sorry, your tires are too wide for a MotoTote.</h3>
+  <p>While we offer among the widest tire tracks in the industry, we currently do not 
+  have a carrier that will fit your width of motorcycles tires.</p>
+  <p>We are currently developing a new solution for wider tires. </p>
+  <p>For more help, click the red chat icon to the right.</p>`;
+const RECOMMENDATIONS = `For your motorcycle, we recommend: `;
+const MODAL_BUTTON_TEXT = "Fit Calculator";
 
-//window["FIT_CALCULATOR_MODAL_MODE"] = true;
+// Page text and labels
+const VEHICLE_TOWING_CAPACITY = "Vehicle Total Towing Capacity (lbs.)";
+const AFTERMARKET_HITCH = " I have an aftermarket hitch";
+const HITCH_TONGUE_WEIGHT_CAPACITY = "Hitch Tongue Weight Capacity";
+const BIKE_WEIGHT = "Bike Weight";
+const FRONT_WHEEL_WIDTH = "Front Wheel Width";
+const REAR_WHEEL_WIDTH = "Rear Wheel Width";
 
 // Constants and configuration
 //maximum bike weight for a mototote
@@ -36,32 +55,6 @@ const URLS = {
   maxPlus: "https://mototote.com/products/max-plus-motorcycle-carrier.json",
 };
 
-// Error and success messages
-const MODAL_HEADER_TEXT = "MotoTote Fit Calculator";
-const BIKE_TOO_HEAVY =
-  "<h3>Your bike is too heavy for a MotoTote carrier.</h3>";
-const VEHICLE_TOO_WIMPY = `<h3>Your vehicle is not rated to haul your bike.</h3> 
-  <p>To haul it, you'll need a vehicle with ##TOWCAP## lbs. towing capacity. </p>
-  <p>You can haul a motorcycle or scooter weighing up to ##BIKEMAX## lbs. with this vehicle.</p>`;
-const HITCH_TOO_WIMPY = `<h3>Your hitch is not rated to haul your bike. </h3>
-  <p>To haul it, you'll need a hitch with ##TOWCAP## lbs. tongue capacity.</p>
-  <p>You can haul a motorcycle or scooter weighing up to ##BIKEMAX## lbs. with this hitch.</p>`;
-const TIRES_TOO_WIDE = `<h3>Sorry, your tires are too wide for a MotoTote.</h3>
-  <p>While we offer among the widest tire tracks in the industry, we currently do not 
-  have a carrier that will fit your width of motorcycles tires.</p>
-  <p>We are currently developing a new solution for wider tires. </p>
-  <p>For more help, click the red chat icon to the right.</p>`;
-const RECOMMENDATIONS = `For your motorcycle, we recommend: `;
-const MODAL_BUTTON_TEXT = "Fit Calculator";
-
-// Page text and labels
-const VEHICLE_TOWING_CAPACITY = "Vehicle Total Towing Capacity (lbs.)";
-const AFTERMARKET_HITCH = " I have an aftermarket hitch";
-const HITCH_TONGUE_WEIGHT_CAPACITY = "Hitch Tongue Weight Capacity";
-const BIKE_WEIGHT = "Bike Weight";
-const FRONT_WHEEL_WIDTH = "Front Wheel Width";
-const REAR_WHEEL_WIDTH = "Rear Wheel Width";
-
 // DANGER ZONE
 // DANGER ZONE
 // DANGER ZONE
@@ -70,6 +63,10 @@ const REAR_WHEEL_WIDTH = "Rear Wheel Width";
 //
 //
 // You probably don't need to edit anything past this point.
+
+import React, { useEffect, useState } from "react";
+import ProductCard from "./components/Product";
+import { Product } from "./types/Product.type";
 
 interface ProductMap {
   [key: string]: Product;
